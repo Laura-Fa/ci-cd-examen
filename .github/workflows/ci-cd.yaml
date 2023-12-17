@@ -27,3 +27,18 @@ jobs:
 
       - name: Run tests
         run: ./vendor/bin/phpunit
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        if: contains('refs/heads/master', github.ref)
+        with:
+          username: laurafau
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: If on `master` Build and push Docker image
+        uses: docker/build-push-action@v4
+        if: contains('refs/heads/master', github.ref)
+        with:
+          push: true
+          context: ./
+          tags: laurafau/companies:latest
