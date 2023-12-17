@@ -3,7 +3,6 @@ name: ci-cd
 on:
   - push
   - pull_request
-  - pull_request
 jobs:
   ci:
     runs-on: ubuntu-22.04
@@ -14,3 +13,17 @@ jobs:
       - uses: hadolint/hadolint-action@v3.1.0
         with:
           dockerfile: Dockerfile
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+
+      - name: Install dependencies
+        run: composer install
+
+      - name: Run linter
+        run: ./vendor/bin/phpstan analyse src tests
+
+      - name: Run tests
+        run: ./vendor/bin/phpunit
