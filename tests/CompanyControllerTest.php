@@ -8,7 +8,7 @@ class CompanyControllerTest extends WebTestCase
 {
     public function testCreateCompany(): void
     {
-        $client = static::createClient()
+        $client = static::createClient();
         $crawler = $client->request(
             'POST',
             '/api/companies',
