@@ -38,3 +38,28 @@ Le JSON attendu d'une entreprise est :
 Pour installer les dépendances, lancez la commande `composer install`.
 
 Pour démarrer le serveur : `symfony server:start`
+
+# CI/CD
+
+## CI (Intégration continue)
+
+-> Sur une pull request :
+
+Les étapes du CI et les commandes associées sont les suivantes :
+
+- Configuration de l'environnement php
+- Installation des dépendances `composer install`
+- Analyse statique des dossiers src et tests `./vendor/bin/phpstan analyse src tests`
+- Exécution des tests `./vendor/bin/phpunit`
+
+## Déploiement continu
+
+-> Si le CI est un succès, le livrable est déployé (Mis en place pour la branche master uniquement) :
+
+Le livrable du déploiement continu est une image Docker "latest" poussée sur DockerHub. Un fichier Dockerfile passant la validation hadolint est utilisé.
+
+## CD (Livraison continue)
+
+-> A la création d'un tag git et si le CI est un succès :
+
+Le livrable de la livraison continue est une image Docker poussée sur DockerHub dont le tag est le tag git.
