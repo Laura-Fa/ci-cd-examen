@@ -97,7 +97,7 @@ class CompanyController extends AbstractController
 
         // Verifier que le JSON est valide
         $constraint = new Assert\Collection([
-            'Siren' => [new Assert\Type('string'), new Assert\Length(['min' => 9, 'max' => 9])],
+            'Siren' => [new Assert\Type('string'), new Assert\Length(['min' => 10, 'max' => 10])],
             'Raison_sociale' => [new Assert\Type('string'), new Assert\NotBlank()],
             'Adresse' => new Assert\Collection([
                 'Num' => new Assert\Type(type: 'integer'),
