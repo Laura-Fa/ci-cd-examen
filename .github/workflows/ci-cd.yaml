@@ -1,0 +1,16 @@
+name: ci-cd
+
+on:
+  - push
+  - pull_request
+  - pull_request
+jobs:
+  ci:
+    runs-on: ubuntu-22.04
+    env:
+      IMAGE_NAME: "php:8"
+    steps:
+      - uses: actions/checkout@v3
+      - uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
